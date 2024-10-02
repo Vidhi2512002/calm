@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calm Companion</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #00796b, #e0f7fa, #ffe0b2); /* Gradient with teal */
+            background-image: url('forest-background.jpg'); /* Forest background */
+            background-size: cover;
+            background-blend-mode: overlay; /* Blend gradient with forest */
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+            position: relative;
+        }
+        h1 {
+            color: #004d40; /* Darker teal */
+        }
+        #chatbox {
+            border: 2px solid #80deea; /* Lighter teal */
+            border-radius: 10px;
+            padding: 20px;
+            width: 350px;
+            margin: 20px auto;
+            background-color: rgba(178, 235, 242, 0.9); /* Soft teal with transparency */
+        }
+        #response {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #004d40; /* Darker teal */
+        }
+        #puppyImage {
+            width: 200px;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            animation: bounce 2s infinite; /* Puppy bounce animation */
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        #backgroundMusic {
+            display: none; /* Hide audio controls */
+        }
+        #waveBackground {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 150px; /* Adjust height as needed */
+            background: url('waves-background.png') repeat-x; /* Sea waves background */
+            animation: waves 5s linear infinite; /* Simple wave animation */
+        }
+        @keyframes waves {
+            0% { background-position: 0; }
+            100% { background-position: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <audio id="backgroundMusic" loop autoplay>
+        <source src="soothing-music.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    
+    <h1>Welcome to Calm Companion!</h1>
+    <div id="chatbox">
+        <h2>Talk to Me!</h2>
+        <textarea id="userInput" rows="4" placeholder="Type your worries here..."></textarea><br>
+        <button onclick="submitInput()">Send</button>
+        <div id="response"></div>
+    </div>
+    
+    <img id="puppyImage" src="cute-puppy.png" alt="Cute Puppy" />
+    <div id="waveBackground"></div>
+
+    <script>
+        function submitInput() {
+            const userInput = document.getElementById('userInput').value.toLowerCase();
+            const responseElement = document.getElementById('response');
+            
+            // Generate a sympathetic response based on user input
+            const sympatheticResponse = "It's okay to feel that way. Remember, you're not alone.";
+            responseElement.innerHTML = sympatheticResponse + "<br>" + suggestActivity(userInput);
+            
+            // Clear input
+            document.getElementById('userInput').value = '';
+        }
+
+        function suggestActivity(input) {
+            // Simple activity suggestion logic based on keywords
+            if (input.includes("stressed")) {
+                return "How about some light stretching exercises? Your virtual puppy will appreciate it!";
+            } else if (input.includes("sad")) {
+                return "It's okay to feel sad sometimes. Why not take a walk in nature or listen to some uplifting music?";
+            } else if (input.includes("anxious")) {
+                return "Try some deep breathing exercises! Let’s keep that puppy happy!";
+            } else if (input.includes("happy")) {
+                return "That’s wonderful to hear! Celebrate by doing something fun!";
+            }
+            return "Consider taking a deep breath and relaxing for a moment.";
+        }
+    </script>
+</body>
+</html>
